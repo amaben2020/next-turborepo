@@ -1,6 +1,9 @@
 'use client';
 
-import { useIsMobile, useBreakpoint } from '@repo/mobile';
+import {
+  useIsMobile,
+  useBreakpoint,
+} from '../../../../packages/mobile/dist/index.js';
 
 export function MobileDemo() {
   const { isMobile, width, height } = useIsMobile();

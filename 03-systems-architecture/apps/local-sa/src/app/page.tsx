@@ -1,5 +1,5 @@
-import { auth } from "@/auth";
-import { revalidatePath } from "next/cache";
+import { auth } from '@/auth';
+import { revalidatePath } from 'next/cache';
 
 import {
   Todo,
@@ -8,11 +8,12 @@ import {
   addTodo,
   updateTodoCompletion,
   deleteTodo,
-} from "@repo/todos";
+} from '@repo/todos';
 
-import AuthButton from "@/components/AuthButton.server";
+import AuthButton from '@/components/AuthButton.server';
+import { MobileDemo } from '@/components/MobileDemo';
 
-import TodoList from "./TodoList";
+import TodoList from './TodoList';
 
 export default async function Home() {
   const session = await auth();
@@ -26,40 +27,43 @@ export default async function Home() {
     priority: string,
     completed: boolean = false
   ) {
-    "use server";
+    'use server';
     const session = await auth();
-    if (!session?.user?.id) throw new Error("User not authenticated");
+    if (!session?.user?.id) throw new Error('User not authenticated');
     addTodo(session?.user?.id, {
       id: `${session?.user?.id}-${Date.now()}`,
       title,
       priority,
       completed,
     });
-    revalidatePath("/");
+    revalidatePath('/');
   }
 
   async function updateTodoCompletionAction(
     todoId: string,
     completed: boolean
   ) {
-    "use server";
+    'use server';
     const session = await auth();
-    if (!session?.user?.id) throw new Error("User not authenticated");
+    if (!session?.user?.id) throw new Error('User not authenticated');
     updateTodoCompletion(session?.user?.id, todoId, completed);
-    revalidatePath("/");
+    revalidatePath('/');
   }
 
   async function deleteTodoAction(todoId: string) {
-    "use server";
+    'use server';
     const session = await auth();
-    if (!session?.user?.id) throw new Error("User not authenticated");
+    if (!session?.user?.id) throw new Error('User not authenticated');
     deleteTodo(session?.user?.id, todoId);
-    revalidatePath("/");
+    revalidatePath('/');
   }
 
   return (
     <main>
       <AuthButton />
+      <div className="mb-6">
+        <MobileDemo />
+      </div>
       {session?.user && (
         <TodoList
           todos={todos}

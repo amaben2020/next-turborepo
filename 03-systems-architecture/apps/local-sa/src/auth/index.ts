@@ -1,15 +1,15 @@
-import NextAuth from "next-auth";
-import { User, NextAuthConfig } from "next-auth";
-import Credentials from "next-auth/providers/credentials";
+import NextAuth from 'next-auth';
+import { User, NextAuthConfig } from 'next-auth';
+import Credentials from 'next-auth/providers/credentials';
 
-import { validateUser, encodeJWT, decodeJWT } from "@repo/auth";
+import { validateUser, encodeJWT, decodeJWT } from '@repo/auth';
 
-export const BASE_PATH = "/api/auth";
+export const BASE_PATH = '/api/auth';
 
 export const authOptions: NextAuthConfig = {
   jwt: {
     async encode({ token }) {
-      return token ? encodeJWT(token) : "";
+      return token ? encodeJWT(token) : '';
     },
     async decode({ token }) {
       return decodeJWT(token);
@@ -25,10 +25,10 @@ export const authOptions: NextAuthConfig = {
   },
   providers: [
     Credentials({
-      name: "Credentials",
+      name: 'Credentials',
       credentials: {
-        username: { label: "Username", type: "text", placeholder: "jsmith" },
-        password: { label: "Password", type: "password" },
+        username: { label: 'Username', type: 'text', placeholder: 'jsmith' },
+        password: { label: 'Password', type: 'password' },
       },
       async authorize(credentials): Promise<User | null> {
         return validateUser(
@@ -39,7 +39,7 @@ export const authOptions: NextAuthConfig = {
   ],
   trustHost: true,
   basePath: BASE_PATH,
-  secret: process.env.NEXTAUTH_SECRET || "simple-secret",
+  secret: process.env.NEXTAUTH_SECRET || 'simple-secret',
 };
 
 export const { handlers, auth, signIn, signOut } = NextAuth(authOptions);

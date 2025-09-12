@@ -6,7 +6,13 @@
     "dev": "PORT=3000 next dev",
     "build": "next build",
     "start": "PORT=3000 next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "cypress:open": "cypress open",
+    "cypress:run": "cypress run",
+    "cypress:run:component": "cypress run --component",
+    "cypress:run:e2e": "cypress run --e2e",
+    "test:e2e": "cypress run --e2e",
+    "test:component": "cypress run --component"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.1.0",
@@ -29,11 +35,14 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@cypress/react": "^9.0.1",
+    "@cypress/webpack-dev-server": "^5.1.1",
     "@repo/eslint-config": "workspace:*",
     "@repo/typescript-config": "workspace:*",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "cypress": "^15.2.0",
     "eslint": "^8",
     "eslint-config-next": "14.2.3",
     "postcss": "^8",

@@ -1,17 +1,17 @@
-"use client";
-import { useState } from "react";
+'use client';
+import { useState } from 'react';
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
-import { Checkbox } from "@/components/ui/checkbox";
+} from '@/components/ui/select';
+import { Input } from '@/components/ui/input';
+import { Checkbox } from '@/components/ui/checkbox';
 
-import { Todo } from "@repo/todos";
-import { Button } from "@/components/ui/button";
+import { Todo } from '@repo/todos';
+import { Button } from '@/components/ui/button';
 
 export default function TodoList({
   priorities,
@@ -27,7 +27,7 @@ export default function TodoList({
   deleteTodoAction: (todoId: string) => void;
 }) {
   const [priority, setPriority] = useState<string>(priorities[0]);
-  const [title, setTitle] = useState<string>("");
+  const [title, setTitle] = useState<string>('');
 
   const onSubmit = async () => {
     await addTodoAction(title, priority);
@@ -42,7 +42,7 @@ export default function TodoList({
   };
 
   return (
-    <div className="mt-5">
+    <div className="mt-5" data-testid="todo-list">
       {todos && (
         <>
           <ul>
@@ -61,7 +61,7 @@ export default function TodoList({
           </ul>
         </>
       )}
-      <div className="flex gap-2">
+      <div className="flex gap-2" data-testid="add-todo-form">
         <Select value={priority} onValueChange={(v) => setPriority(v)}>
           <SelectTrigger className="w-[180px]">
             <SelectValue placeholder="Priority" />
